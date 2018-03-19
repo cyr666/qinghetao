@@ -22,8 +22,8 @@
                                     <div class="title" @click="scientificDetail(item.id)">{{item.title}}</div>
                                     <p class="small-title">{{item.abstracts}}</p>
                                     <div class="base">
-                                        <img src="../assets/img/date@2x.png"/><span>{{item.institution}}</span>
-                                        <img src="../assets/img/source@2x.png"/>
+                                        <img src="../assets/img/jigou.png"/><span>{{item.institution}}</span>
+                                        <img src="../assets/img/teach.png"/>
                                         <span v-for = "a in item.mavinArray" :key="a.id">
                                             {{a.name}}
                                         </span>

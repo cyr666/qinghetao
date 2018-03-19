@@ -14,6 +14,9 @@ Vue.prototype.$echarts = echarts;
 import biz from './config.js';
 Vue.prototype.biz = biz;
 
+import VueAwesomeSwiper from 'vue-awesome-swiper';
+Vue.use(VueAwesomeSwiper);
+
 const app = new Vue({
     router
 }).$mount('#app');

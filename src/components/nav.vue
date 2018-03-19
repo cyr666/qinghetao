@@ -18,9 +18,9 @@
                 <li v-for="item in navChild" @click="anchor(item.id)">{{item.value_zh}}</li>
             </ul>
         </div>
-        <div class="nav-list" :class="{'active':selected1}" @click="changeTab('scientific')">
-            <img src="../assets/img/nav-white01@2x.png" class="dynamic-icon" v-if="!selected1"/>
-            <img src="../assets/img/nav-blue01@2x.png" class="dynamic-icon" v-if="selected1"/>
+        <div class="nav-list" :class="{'active':selected3}" @click="changeTab('scientific')">
+            <img src="../assets/img/scientific1.png" class="scientific-icon" v-if="!selected3"/>
+            <img src="../assets/img/scientific2.png" class="scientific-icon" v-if="selected3"/>
             <span style="margin-left:10px;">科技成果</span>
         </div>
         <p class="copyright">Copyright © 2013-2018 Greenut. All Rights Reserved.</p>
@@ -59,6 +59,10 @@
             width:17px;
             height:14px;
             margin-left:3px;
+        }
+        .scientific-icon{
+            width:22px;
+            height:15px;
         }
     }
     .active{
@@ -110,6 +114,7 @@
             return {
                 selected1:true,
                 selected2:false,
+                selected3:false,
                 navChild:[]
             }
         },
@@ -145,12 +150,20 @@
                 if(routeName === 'dynamic' || routeName === 'newsDetail'){
                     this.selected1 = true;
                     this.selected2 = false;
+                    this.selected3 = false;
                     sessionStorage.setItem('classification','dynamic');
                 }
                 if(routeName === 'reference' || routeName === 'referenceDetail'){
                     this.selected1 = false;
                     this.selected2 = true;
+                    this.selected3 = false;
                     sessionStorage.setItem('classification','reference');
+                }
+                if(routeName === 'scientific' || routeName === 'scientificDetail'){
+                    this.selected1 = false;
+                    this.selected2 = false;
+                    this.selected3 = true;
+                    sessionStorage.setItem('classification','scientific');
                 }
                 console.log(routeName)
                 // 未登录时返回到登录页
