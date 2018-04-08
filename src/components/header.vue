@@ -1,7 +1,7 @@
 <template>
     <div class="search">
         <div class="searchText">
-            <input type="text" v-model="searchVal" class="searchInput" placeholder="请输入你要查找的内容"
+            <input type="text" v-model="searchVal" class="searchInput" id = "input" placeholder="请输入你要查找的内容"
                    @keyup.enter="searchResult"/>
             <i class="input-icon" @click="searchResult"></i>
         </div>
@@ -116,14 +116,17 @@
                     if(classification === 'dynamic'){
                         this.$router.push(`/dynamic`);
                         bus.$emit('dynamicListLoad');
+                        sessionStorage.setItem('searchVal', "");
                     } else if(classification === 'reference'){
                         sessionStorage.setItem('searchType','search');
                         this.$router.push(`/reference`);
                         bus.$emit('referenceListLoad');
+                        sessionStorage.setItem('searchVal', "");
                     }else if(classification === 'scientific'){
                         sessionStorage.setItem('searchType','search');
                         this.$router.push(`/scientific`);
                         bus.$emit('scientificListLoad');
+                        sessionStorage.setItem('searchVal', "");
                     }
                 }
             }
@@ -133,6 +136,11 @@
             bus.$on('setSearchVal',()=>{
                 this.searchVal = sessionStorage.getItem('searchVal');
             });
+            bus.$on('changePlacehold',(i)=>{
+                $('#input').val("");
+                $('#input').attr('placeholder','关键词、技术、行业、院校、研究机构...')
+                //this.test();
+            })
             $(document).click((event) => {
                 event.stopPropagation();
                 if ((!$('.quit').is(event.target) && $('.quit').has(event.target).length === 0 )

@@ -162,7 +162,9 @@
                 this.pageNum = curPage;
                 if(this.flag === 0){
                     this.getNewsList();
-                } 
+                } else if(this.flag === 1) {
+                    this.getSearchNewsList();
+                }
                 
                 window.scrollTo(0, 0);
             },
@@ -230,6 +232,7 @@
                 this.getNewsList();
             },
             scientificDetail(id){
+                console.log(id)
                 this.$router.push(`/scientificDetail`);
                 sessionStorage.setItem('scientificId',id);
                 bus.$emit('scientificDetail');

@@ -2,27 +2,37 @@
 <template>
     <div class="nav">
         <img src="../assets/img/LOGO.png" class="logo"/>
-        <div class="nav-list" :class="{'active':selected1}" @click="changeTab('dynamic')">
-            <img src="../assets/img/nav-white01@2x.png" class="dynamic-icon" v-if="!selected1"/>
-            <img src="../assets/img/nav-blue01@2x.png" class="dynamic-icon" v-if="selected1"/>
-            <span style="margin-left:10px;">科技动态</span>
+        <div class="nav-list" :class="{'active':selected4}" @click="changeTab('bigdata')">
+            <img src="../assets/img/bigData1.png" class="bigData-icon" v-if="!selected4"/>
+            <img src="../assets/img/bigData2.png" class="bigData-icon" v-if="selected4"/>
+            <span style="margin-left:11px;">科技大数据</span>
+        </div>
+        <div class="nav-list" :class="{'active':selected5}" @click="changeTab('technologyTransform')">
+            <img src="../assets/img/scientific1.png" class="scientific-icon" v-if="!selected5"/>
+            <img src="../assets/img/scientific2.png" class="scientific-icon" v-if="selected5"/>
+            <span style="margin-left:12px;">技术转移服务</span>
         </div>
         <div class="nav2" :class="{'bg':selected2}">
             <div class="nav-list" :class="{'active':selected2}" @click="changeTab('reference')">
                 <img src="../assets/img/nav-white02@2x.png" class="reference-icon" v-if="!selected2"/>
                 <img src="../assets/img/nav-blue02@2x.png" class="reference-icon" v-if="selected2"/>
-                <span style="margin-left:13px;">科技内参</span>
+                <span style="margin-left:13px;">科技分析</span>
                 <i class="jiantou"></i>
             </div>
             <ul class="nav-child">
                 <li v-for="item in navChild" @click="anchor(item.id)">{{item.value_zh}}</li>
             </ul>
         </div>
-        <div class="nav-list" :class="{'active':selected3}" @click="changeTab('scientific')">
+        <div class="nav-list" :class="{'active':selected1}" @click="changeTab('dynamic')">
+            <img src="../assets/img/nav-white01@2x.png" class="dynamic-icon" v-if="!selected1"/>
+            <img src="../assets/img/nav-blue01@2x.png" class="dynamic-icon" v-if="selected1"/>
+            <span style="margin-left:10px;">科技动态</span>
+        </div>
+        <!-- <div class="nav-list" :class="{'active':selected3}" @click="changeTab('scientific')">
             <img src="../assets/img/scientific1.png" class="scientific-icon" v-if="!selected3"/>
             <img src="../assets/img/scientific2.png" class="scientific-icon" v-if="selected3"/>
-            <span style="margin-left:10px;">科技成果</span>
-        </div>
+            <span style="margin-left:12px;">科技成果</span>
+        </div> -->
         <p class="copyright">Copyright © 2013-2018 Greenut. All Rights Reserved.</p>
     </div>
 </template>
@@ -39,8 +49,8 @@
     //text-align:center;
     color:#ffffff;
     .logo{
-        width:118px;
-        height:40px;
+        width:110px;
+        height:59px;
         margin-left:51px;
         margin-bottom:40px;
     }
@@ -61,8 +71,14 @@
             margin-left:3px;
         }
         .scientific-icon{
-            width:22px;
-            height:15px;
+            width:15px;
+            height:17px;
+            margin-left:5px;
+        }
+        .bigData-icon{
+            width:17px;
+            height:17px;
+            margin-left:3px;
         }
     }
     .active{
@@ -112,9 +128,11 @@
         components: {},
         data(){
             return {
-                selected1:true,
+                selected1:false,
                 selected2:false,
                 selected3:false,
+                selected4:true,
+                selected5:false,
                 navChild:[]
             }
         },
@@ -140,32 +158,60 @@
                     this.$router.push(`/scientific`);
                     bus.$emit('scientificLoad');
                 }
+                if(val === 'bigdata'){
+                    //this.anchorId = '';
+                    this.$router.push(`/bigdata`);
+                    //bus.$emit('scientificLoad');
+                }
+                if(val === 'technologyTransform') {
+                    this.$router.push(`/technologyTransform`);
+                }
                 sessionStorage.setItem('searchType','click');
                 sessionStorage.setItem('classification',val);
                 bus.$emit('setSearchVal');
             },
             setTabColor() {
                 let routeName = this.$route.name;
-
+                if(routeName === 'bigdata'){
+                    this.selected1 = false;
+                    this.selected2 = false;
+                    this.selected3 = false;
+                    this.selected4 = true;
+                    this.selected5 = false;
+                    sessionStorage.setItem('classification','bigdata');
+                }
                 if(routeName === 'dynamic' || routeName === 'newsDetail'){
                     this.selected1 = true;
                     this.selected2 = false;
                     this.selected3 = false;
+                    this.selected4 = false;
+                    this.selected5 = false;
                     sessionStorage.setItem('classification','dynamic');
                 }
                 if(routeName === 'reference' || routeName === 'referenceDetail'){
                     this.selected1 = false;
                     this.selected2 = true;
                     this.selected3 = false;
+                    this.selected4 = false;
+                    this.selected5 = false;
                     sessionStorage.setItem('classification','reference');
                 }
                 if(routeName === 'scientific' || routeName === 'scientificDetail'){
                     this.selected1 = false;
                     this.selected2 = false;
                     this.selected3 = true;
+                    this.selected4 = false; 
+                    this.selected5 = false;
                     sessionStorage.setItem('classification','scientific');
                 }
-                console.log(routeName)
+                if(routeName === 'technologyTransform'){
+                    this.selected1 = false;
+                    this.selected2 = false;
+                    this.selected3 = false;
+                    this.selected4 = false;
+                    this.selected5 = true; 
+                    sessionStorage.setItem('classification','technologyTransform');
+                }
                 // 未登录时返回到登录页
                 let userName = sessionStorage.getItem('userName');
                 if(userName === null){

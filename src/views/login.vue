@@ -296,8 +296,8 @@
                             switch(res.signType){
                                 case 0:
                                     sessionStorage.setItem('userName',this.username);
-                                    this.$router.push(`/dynamic`);
-                                    bus.$emit('dynamicLoad');
+                                    this.$router.push(`/bigdata`);
+                                    bus.$emit('bigData');
                                     sessionStorage.setItem('searchVal','');
                                     bus.$emit('setSearchVal');
                                     break;

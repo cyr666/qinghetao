@@ -7,10 +7,12 @@ import reference from '../views/reference.vue';
 import referenceDetail from '../views/referenceDetail.vue';
 import scientific from '../views/scientific.vue';
 import scientificDetail from '../views/scientificDetail.vue';
-
+import bigData from '../views/bigData.vue';
+import technologyTransform from '../views/technologyTransform.vue'
 Vue.use(Router);
 
 export default new Router({
+    //mode:'history',
     routes: [
         {
             path: '/',
@@ -51,6 +53,16 @@ export default new Router({
             path: '/scientificDetail',
             name: 'scientificDetail',
             component: scientificDetail
+        },
+        {
+            path: '/bigdata',
+            name: 'bigdata',
+            component: bigData
+        },
+        {
+            path: '/technologyTransform',
+            name: 'technologyTransform',
+            component: technologyTransform
         }
     ]
 });
